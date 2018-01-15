@@ -1,0 +1,8 @@
+    applications:
+    - name: Web-Interests
+      host: Web-Interests
+      memory: 128M
+      command: node app.js
+      services:
+      - mongodbnode
+

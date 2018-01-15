@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 //EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--include style sheets-->
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="styles/app.css">
+    <!--include scripts-->
+    <script type="text/javascript" src="scripts/angular.js"></script>
+    <script type="text/javascript" src="scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/fakeServer.js"></script>
+    <script type="text/javascript" src="scripts/app.js"></script>
+</head>
+<body ng-app="myApp">
+<!--for Logo-->
+<div class="container pad-5">
+    <img class="pull-left" src="images/Logo.png"><br/>
+</div>
+
+<div class="pad-5">
+    <img class="center-block hidden" src="images/loading.gif" id="loading">
+</div>
+
+<!--this displays the current pages in the system-->
+<div id="sites_screen" class="screen container" ng-controller="getData" ng-init="init()">
+    <div class="container pad-5">
+        User Name: {{userName}}
+        <br/>
+        <input id="userInput" type="text" placeholder="Enter URL">
+        <input type="button" value="Submit" onclick="submitSite($('#userInput').val())">
+        <br/>
+    </div>
+    <table id="liked_table" class="table table-hover">
+        <tr>
+            <th></th>
+            <th>Liked Web Page</th>
+        </tr>
+        <!--renders each site using angularJS-->
+        <tr ng-repeat="w in webSites track by $index">
+            <td></td>
+            <td class="display_monitor_name"><a href={{w}}>{{w}}</a></td>
+        </tr>
+    </table>
+    <br/>
+    <table id="recommend_table" class="table table-hover">
+        <tr>
+            <th></th>
+            <th>Recommended Web Page</th>
+        </tr>
+        <!--renders each site using angularJS-->
+        <tr ng-repeat="r in recomendations track by $index">
+            <td><span data-toggle="tooltip" data-placement="left"
+                      title="Add Web Page To Liked" ng-click="submitSite(r.toString())">+</span></td>
+            <td class="display_monitor_name"><a href={{r}}>{{r}}</a></td>
+        </tr>
+    </table><br/>
+    <input type="button" onclick="logout('https://localhost:3000/safe')" value="logout">
+</div>
+</body>
+</html>
